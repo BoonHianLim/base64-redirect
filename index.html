@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--script to redirect to another webpage-->
+    <script>
+        // Function to get query parameters by name
+        function getQueryParam(param) {
+            let urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function base64Decode(str) {
+            try {
+                // Decode base64 string to plain text
+                return decodeURIComponent(escape(atob(str)));
+            } catch (e) {
+                console.error('Invalid Base64 string:', e);
+                return null;
+            }
+        }
+
+        function myFunc() {
+            const query = getQueryParam('redirect'); // Get the value of the ?query= parameter
+            if (query) {
+                const decodedURL = base64Decode(query);
+
+                let url = decodedURL;
+
+                const pattern = /^((http|https):\/\/)/;
+
+                if (!pattern.test(url)) {
+                    url = "https://" + url;
+                }
+
+                // check whether the URL has www
+                if (url.indexOf('www.') == -1) {
+                    // if http, https is present in the URL
+                    url = url.replace('://', '://www.');
+                }
+
+                // Perform the redirection
+                console.log('Redirecting to:', url);
+                location.replace(url);
+            } else {
+                console.error('No query parameter found.');
+            }
+
+        }
+
+        // Trigger redirect when the page loads
+        window.onload = myFunc;
+    </script>
+</head>
+
+<body>
+    <h2>Is the redirecting not working? Click the button below.</h2>
+
+    <button onclick="myFunc()">Redirect now</button>
+</body>
+
+</html>
