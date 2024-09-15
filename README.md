@@ -19,4 +19,4 @@ Have Fun!
 
 The idea of this codebase is since url shortener is such a popular design problem, I would like to check if it is possible to  implement the base-64 approach for shortening the URL in a static website.
 
-However, since in static website it is not possible to store the website, the easiest approach is just to base64 encoded the link itself. Technically this is not a shortner but more of a redirect, hence the name.
+Technically we should have use a mapping between the unique ID in the database to match with the website, then use base62 / base64 encoding to convert the id. However, in static website, there isn't a easy way to just store something without starting a server. The easiest approach is just to base64 encoded the link itself. Technically this is not a shortner but more of a redirect, hence the name.
